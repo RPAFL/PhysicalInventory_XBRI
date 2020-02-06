@@ -1,0 +1,169 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Matching_SKU" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="in_xbriDT" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_OutputDT" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>638,831</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Matching_SKU" sap:VirtualizedContainerService.HintSize="618,771" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:GenericValue" Name="SKU" />
+      <Variable x:TypeArguments="x:String" Name="Exception" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign DisplayName="Assigning SKU to a Variable" sap:VirtualizedContainerService.HintSize="576,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="ui:GenericValue">[SKU]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="ui:GenericValue">[in_TransactionItem(0).ToString+in_TransactionItem(2).ToString+in_TransactionItem(3).ToString+in_TransactionItem(6).ToString+in_TransactionItem(7).ToString+in_TransactionItem(10).ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="576,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[SKU+&quot; Taken for Match&quot;]" />
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[in_xbriDT]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="576,448" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,300" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If Condition="[row(&quot;SKU&quot;).ToString.Trim.Length=15 And Not String.IsNullOrEmpty(row(&quot;SKU&quot;).ToString.Trim)]" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_5">
+              <If.Then>
+                <If Condition="[row(&quot;SKU&quot;).ToString.trim.Substring(2,2).Trim.Equals(in_TransactionItem(2).ToString.trim) and row(&quot;SKU&quot;).ToString.trim.Substring(4,5).Trim.Equals(in_TransactionItem(3).ToString.trim) and row(&quot;SKU&quot;).ToString.trim.Substring(12,3).Trim.Equals(in_TransactionItem(10).ToString.trim)]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="1034,725" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="992,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;SKU matched with the XBRI&quot;]" />
+                      <If Condition="[CINT(row(&quot;Quantity SKU&quot;).ToString)&lt;0]" sap:VirtualizedContainerService.HintSize="992,502" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="284,206" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Sequence sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="x:String" Name="sample" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_TransactionItem(0).ToString, in_TransactionItem(2).ToString, in_TransactionItem(3).ToString, in_TransactionItem(6).ToString, in_TransactionItem(7).ToString, in_TransactionItem(10).ToString, in_TransactionItem(&quot;Excp&quot;).ToString, in_TransactionItem(&quot;Price&quot;).ToString, (CInt(in_TransactionItem(&quot;Excp&quot;).ToString)*CInt(in_TransactionItem(&quot;Price&quot;).ToString)).Tostring, in_TransactionItem(&quot;Description&quot;).ToString, row(&quot;Cashier (Full Desc)&quot;).ToString, row(5).ToString, row(&quot;Register&quot;).ToString, row(&quot;Trans Date&quot;).ToString, row(&quot;Trans Time&quot;).ToString, row(&quot;Trans&quot;).ToString, row(&quot;Trans Status&quot;).ToString, row(&quot;Trans Type&quot;).ToString, row(&quot;Void Code&quot;).ToString, row(&quot;Item Type&quot;).ToString, row(&quot;Return Reason&quot;).ToString, row(15).ToString, row(&quot;SKU Refund/Exchange Match Code&quot;).ToString, row(&quot;Training Flag&quot;).ToString, row(&quot;SKU&quot;).ToString, row(19).ToString, row(&quot;Employee Sale Flag&quot;).ToString, row(&quot;Customer (Full Desc)&quot;).ToString, row(22).ToString, row(&quot;Customer Phone (Full Desc)&quot;).ToString, row(&quot;Merch Dept&quot;).ToString, row(&quot;Quantity SKU&quot;).ToString, row(&quot;Original Amount SKU&quot;).ToString, row(&quot;Price Override Amount SKU&quot;).ToString, row(&quot;Line Disc Amount SKU&quot;).ToString, row(&quot;Line Disc Pct SKU&quot;).ToString, row(&quot;Extended Amount SKU&quot;).ToString}]" DataTable="[io_OutputDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                            </Sequence>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap:VirtualizedContainerService.HintSize="663,354" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If Condition="[row(&quot;Trans Status&quot;).ToString.Equals(&quot;Cancel&quot;)or row(&quot;Trans Status&quot;).ToString.Equals(&quot;Incomplete&quot;)or row(&quot;Trans Status&quot;).ToString.Equals(&quot;Suspend&quot;)]" sap:VirtualizedContainerService.HintSize="621,262" sap2010:WorkflowViewState.IdRef="If_3">
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_TransactionItem(0).ToString, in_TransactionItem(2).ToString, in_TransactionItem(3).ToString, in_TransactionItem(6).ToString, in_TransactionItem(7).ToString, in_TransactionItem(10).ToString, in_TransactionItem(&quot;Excp&quot;).ToString, in_TransactionItem(&quot;Price&quot;).ToString, (CInt(in_TransactionItem(&quot;Excp&quot;).ToString)*CInt(in_TransactionItem(&quot;Price&quot;).ToString)).Tostring, in_TransactionItem(&quot;Description&quot;).ToString, row(&quot;Cashier (Full Desc)&quot;).ToString, row(5).ToString, row(&quot;Register&quot;).ToString, row(&quot;Trans Date&quot;).ToString, row(&quot;Trans Time&quot;).ToString, row(&quot;Trans&quot;).ToString, row(&quot;Trans Status&quot;).ToString, row(&quot;Trans Type&quot;).ToString, row(&quot;Void Code&quot;).ToString, row(&quot;Item Type&quot;).ToString, row(&quot;Return Reason&quot;).ToString, row(15).ToString, row(&quot;SKU Refund/Exchange Match Code&quot;).ToString, row(&quot;Training Flag&quot;).ToString, row(&quot;SKU&quot;).ToString, row(19).ToString, row(&quot;Employee Sale Flag&quot;).ToString, row(&quot;Customer (Full Desc)&quot;).ToString, row(22).ToString, row(&quot;Customer Phone (Full Desc)&quot;).ToString, row(&quot;Merch Dept&quot;).ToString, row(&quot;Quantity SKU&quot;).ToString, row(&quot;Original Amount SKU&quot;).ToString, row(&quot;Price Override Amount SKU&quot;).ToString, row(&quot;Line Disc Amount SKU&quot;).ToString, row(&quot;Line Disc Pct SKU&quot;).ToString, row(&quot;Extended Amount SKU&quot;).ToString}]" DataTable="[io_OutputDT]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                                </Sequence>
+                              </If.Then>
+                              <If.Else>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Transaction Status Not Matched the Criteria&quot;]" />
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </If.Then>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+  </Sequence>
+</Activity>
